@@ -7,7 +7,7 @@ export class ToastService {
   private toastController = inject(ToastController);
   private defaultOptions: Partial<ToastOptions> = {
     duration: 1500,
-    position: 'bottom',
+    position: 'top',
     keyboardClose: true,
   };
 

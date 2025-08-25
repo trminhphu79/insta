@@ -31,11 +31,11 @@ export const routes: Routes = [
     loadChildren: () => import('./auth/auth.routes').then((r) => r.authRoutes),
   },
 
-  {
-    path: '**',
-    loadComponent: () =>
-      import('./not-found/not-found.component').then(
-        (c) => c.NotFoundComponent
-      ),
-  },
+  // {
+  //   path: '**',
+  //   loadComponent: () =>
+  //     import('./not-found/not-found.component').then(
+  //       (c) => c.NotFoundComponent
+  //     ),
+  // },
 ];

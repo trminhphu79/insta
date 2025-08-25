@@ -10,17 +10,17 @@ export class AuthApi extends BaseApi {
   }
 
   login<T, K>(body: T) {
-    const endpoint = `${this.baseUrl}/auth/login`;
+    const endpoint = `${this.baseUrl}/users/login`;
     return this.httpClient.post<IBaseResponse<K>>(endpoint, body);
   }
 
   register<T, K>(body: T) {
-    const endpoint = `${this.baseUrl}/auth/register`;
+    const endpoint = `${this.baseUrl}/users/register`;
     return this.httpClient.post<IBaseResponse<K>>(endpoint, body);
   }
 
   logout<T, K>(body: T) {
-    const endpoint = `${this.baseUrl}/auth/logout`;
+    const endpoint = `${this.baseUrl}/users/logout`;
     return this.httpClient.post<IBaseResponse<K>>(endpoint, body);
   }
 }

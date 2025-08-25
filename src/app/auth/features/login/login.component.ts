@@ -33,7 +33,7 @@ import { withValidation } from '@shared/utils';
 })
 export class LoginComponent {
   authStore = inject(AuthStore);
-  protected isLoading = this.authStore.loading
+  protected isLoading = this.authStore.loading;
 
   protected form: FormGroup = new FormGroup({
     email: new FormControl(
@@ -55,6 +55,6 @@ export class LoginComponent {
       this.form.markAllAsTouched();
       return;
     }
-    this.authStore.login(this.form.value);
+    this.authStore.login(this.form.getRawValue());
   }
 }

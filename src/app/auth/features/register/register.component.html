@@ -27,6 +27,25 @@
   <section class="w-full max-w-94">
     <ion-item>
       <ion-input
+        formControlName="username"
+        label="Username"
+        type="text"
+        labelPlacement="floating"
+        placeholder="Enter username"
+      >
+      </ion-input>
+    </ion-item>
+    <div class="h-[20px] text-sm">
+      @if(form.get('username')?.touched){
+      @if(form.get('username')?.hasError('required')){
+      <ion-text color="danger">Username is required!</ion-text>
+      } }
+    </div>
+  </section>
+
+  <section class="w-full max-w-94">
+    <ion-item>
+      <ion-input
         formControlName="password"
         label="Password"
         type="password"

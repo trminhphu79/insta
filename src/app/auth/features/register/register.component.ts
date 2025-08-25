@@ -40,7 +40,7 @@ export class RegisterComponent {
   private readonly authStore = inject(AuthStore);
   private readonly toastService = inject(ToastService);
 
-  protected isLoading = this.authStore.loading
+  protected isLoading = this.authStore.loading;
 
   protected passwordMessages: Record<string, string> = {
     minLength: 'Password must be at least 8 characters long.',
@@ -55,6 +55,7 @@ export class RegisterComponent {
         null,
         withValidation([Validators.email, Validators.required])
       ),
+      username: new FormControl(null, withValidation([Validators.required])),
       password: new FormControl(
         null,
         withValidation([
