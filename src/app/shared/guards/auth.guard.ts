@@ -12,8 +12,9 @@ export const authCanActivePage = () => {
     tap(() => console.log('Start auth...')),
     delay(1500),
     map((isAuth) => {
-      console.log('End auth...', isAuth);
-      return isAuth ? true : router.createUrlTree(['/auth']);
+      // console.log('End auth...', isAuth);
+      // return !isAuth ? true : router.createUrlTree(['/auth']);
+      return true
     })
   );
 };
