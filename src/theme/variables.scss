@@ -1,2 +1,54 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+:root {
+  --ion-background-color: #f5f3f5;
+  --ion-background-color-rgb: 245, 243, 245;
+
+  --ion-text-color: #212223;
+  --ion-text-color-rgb: 33, 34, 35;
+
+  --ion-text-color-step-50: #2c2c2e;
+  --ion-text-color-step-100: #363738;
+  --ion-text-color-step-150: #414143;
+  --ion-text-color-step-200: #4b4c4d;
+  --ion-text-color-step-250: #565658;
+  --ion-text-color-step-300: #616162;
+  --ion-text-color-step-350: #6b6b6d;
+  --ion-text-color-step-400: #767677;
+  --ion-text-color-step-450: #808082;
+  --ion-text-color-step-500: #8b8b8c;
+  --ion-text-color-step-550: #969597;
+  --ion-text-color-step-600: #a09fa1;
+  --ion-text-color-step-650: #abaaac;
+  --ion-text-color-step-700: #b5b4b6;
+  --ion-text-color-step-750: #c0bfc1;
+  --ion-text-color-step-800: #cbc9cb;
+  --ion-text-color-step-850: #d5d4d6;
+  --ion-text-color-step-900: #e0dee0;
+  --ion-text-color-step-950: #eae9eb;
+
+  --ion-background-color-step-50: #eae9eb;
+  --ion-background-color-step-100: #e0dee0;
+  --ion-background-color-step-150: #d5d4d6;
+  --ion-background-color-step-200: #cbc9cb;
+  --ion-background-color-step-250: #c0bfc1;
+  --ion-background-color-step-300: #b5b4b6;
+  --ion-background-color-step-350: #abaaac;
+  --ion-background-color-step-400: #a09fa1;
+  --ion-background-color-step-450: #969597;
+  --ion-background-color-step-500: #8b8b8c;
+  --ion-background-color-step-550: #808082;
+  --ion-background-color-step-600: #767677;
+  --ion-background-color-step-650: #6b6b6d;
+  --ion-background-color-step-700: #616162;
+  --ion-background-color-step-750: #565658;
+  --ion-background-color-step-800: #4b4c4d;
+  --ion-background-color-step-850: #414143;
+  --ion-background-color-step-900: #363738;
+  --ion-background-color-step-950: #2c2c2e;
+
+  --ion-color-primary: #1a6b9a;
+  --ion-color-primary-rgb: 26, 107, 154;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #175e88;
+  --ion-color-primary-tint: #317aa4;
+}

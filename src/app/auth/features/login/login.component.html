@@ -1,0 +1,67 @@
+<form
+  [formGroup]="form"
+  class="w-full flex flex-col items-center"
+  (submit)="submit()"
+>
+  <section class="w-full max-w-94">
+    <ion-item>
+      <ion-input
+        type="email"
+        label="Email"
+        formControlName="email"
+        labelPlacement="floating"
+      >
+      </ion-input>
+    </ion-item>
+    <div class="h-[20px] text-sm">
+      @if(form.get('email')?.touched){
+      @if(form.get('email')?.hasError('email')){
+      <ion-text color="danger">Email is invalid!</ion-text>
+      } @else if(form.get('email')?.hasError('required')){
+      <ion-text color="danger">Email is required!</ion-text>
+      } }
+    </div>
+  </section>
+
+  <section class="w-full max-w-94">
+    <ion-item class="w-full max-w-94">
+      <ion-input
+        label="Password"
+        type="password"
+        formControlName="password"
+        labelPlacement="floating"
+        placeholder="Enter password"
+      >
+        <ion-input-password-toggle
+          slot="end"
+          [style.visibility]="
+            form.get('password')?.value ? 'visible' : 'hidden'
+          "
+        >
+          >
+        </ion-input-password-toggle>
+      </ion-input>
+    </ion-item>
+    <div class="h-[20px] text-sm">
+      @if(form.get('password')?.touched){
+      @if(form.get('password')?.hasError('required')){
+      <ion-text color="danger">Password is required!</ion-text>
+      } }
+    </div>
+  </section>
+
+  <section class="w-full justify-center flex">
+    <ion-button
+      class="mt-8 w-full max-w-94"
+      size="default"
+      type="submit"
+      shape="round"
+      [disabled]="isLoading() || form.invalid"
+    >
+      @if(isLoading()){
+      <ion-spinner class="absolute"></ion-spinner>
+      } 
+      Login</ion-button
+    >
+  </section>
+</form>

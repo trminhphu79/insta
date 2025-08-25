@@ -1,0 +1,20 @@
+<ion-content [fullscreen]="true">
+  <section class="w-full h-full flex justify-center pt-[120px]">
+    @switch (selectedTab()) { @case (authTabEnum.LOGIN) {
+    <insta-login></insta-login>
+    } @default {
+    <insta-register></insta-register>
+    } }
+  </section>
+  <section class="flex w-full justify-center absolute bottom-10 md:bottom-50">
+    <ion-button
+      class="w-full max-w-94"
+      size="default"
+      fill="outline"
+      type="button"
+      shape="round"
+      (click)="actionClick()"
+      >{{ actionLabel() }}</ion-button
+    >
+  </section>
+</ion-content>

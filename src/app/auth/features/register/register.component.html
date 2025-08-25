@@ -1,0 +1,103 @@
+<form
+  [formGroup]="form"
+  class="w-full flex flex-col items-center"
+  (submit)="submit()"
+>
+  <section class="w-full max-w-94">
+    <ion-item>
+      <ion-input
+        formControlName="email"
+        label="Email"
+        type="email"
+        labelPlacement="floating"
+        placeholder="Enter email"
+      >
+      </ion-input>
+    </ion-item>
+    <div class="h-[20px] text-sm">
+      @if(form.get('email')?.touched){
+      @if(form.get('email')?.hasError('email')){
+      <ion-text color="danger">Email is invalid!</ion-text>
+      } @else if(form.get('email')?.hasError('required')){
+      <ion-text color="danger">Email is required!</ion-text>
+      } }
+    </div>
+  </section>
+
+  <section class="w-full max-w-94">
+    <ion-item>
+      <ion-input
+        formControlName="password"
+        label="Password"
+        type="password"
+        labelPlacement="floating"
+        placeholder="Enter password"
+      >
+        <ion-input-password-toggle
+          slot="end"
+          [style.visibility]="
+            form.get('password')?.value ? 'visible' : 'hidden'
+          "
+        >
+          >
+        </ion-input-password-toggle>
+      </ion-input>
+    </ion-item>
+    <div class="h-[20px] text-sm">
+      @if(form.get('password')?.touched){
+      @if(form.get('password')?.hasError('required')){
+      <ion-text color="danger">Password is required!</ion-text>
+      } @else if (form.get('password')?.hasError('minLength')) {
+      <ion-text color="danger">{{ passwordMessages["minLength"] }}</ion-text>
+      } @else if (form.get('password')?.hasError('maxLength')) {
+      <ion-text color="danger">{{ passwordMessages["maxLength"] }}</ion-text>
+      } @else if (form.get('password')?.hasError('uppercase')) {
+      <ion-text color="danger">{{ passwordMessages["uppercase"] }}</ion-text>
+      } @else if (form.get('password')?.hasError('number')) {
+      <ion-text color="danger">{{ passwordMessages["number"] }}</ion-text>
+      }}
+    </div>
+  </section>
+
+  <section class="w-full max-w-94">
+    <ion-item>
+      <ion-input
+        formControlName="confirmPassword"
+        label="Confirm password"
+        type="password"
+        labelPlacement="floating"
+        placeholder="Enter confirm password"
+      >
+        <ion-input-password-toggle
+          slot="end"
+          [style.visibility]="
+            form.get('confirmPassword')?.value ? 'visible' : 'hidden'
+          "
+        >
+          >
+        </ion-input-password-toggle>
+      </ion-input>
+    </ion-item>
+    <div class="h-[20px] text-sm">
+      @if(form.get('confirmPassword')?.touched){
+      @if(form.get('confirmPassword')?.hasError('required')){
+      <ion-text color="danger">Confirm password is required!</ion-text>
+      } @else if(form.hasError('controlMismatch')){
+      <ion-text color="danger">Passwords do not match!</ion-text>
+      } }
+    </div>
+  </section>
+  <section class="w-full justify-center flex">
+    <ion-button
+      class="mt-8 w-full max-w-94"
+      size="default"
+      type="submit"
+      shape="round"
+      [disabled]="isLoading() || form.invalid"
+    >
+      @if(isLoading()){
+      <ion-spinner class="absolute"></ion-spinner>
+      } Sign up
+    </ion-button>
+  </section>
+</form>
