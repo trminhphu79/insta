@@ -5,6 +5,6 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   imports: [IonApp, IonRouterOutlet],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {}

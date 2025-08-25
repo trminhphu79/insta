@@ -4,6 +4,7 @@ import { LoginDto, LoginResponse, RegisterDto, User } from './auth.types';
 import { AuthApi } from '@shared/apis';
 import { StorageService } from '@shared/services/storage.service';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 type AuthState = {
   user: User | null;
@@ -16,7 +17,7 @@ type AuthState = {
 @Injectable({ providedIn: 'root' })
 export class AuthStore {
   private storage = inject(StorageService);
-  private router = inject(Router);
+  private nav = inject(NavController);
 
   private state = signal<AuthState>({
     user: null,
@@ -51,6 +52,19 @@ export class AuthStore {
 
   login(dto: LoginDto) {
     this.setLoading(true);
+    // setTimeout(() => {
+    //   this.storage.setAccess('data.accessToken');
+    //   this.storage.setRefresh('token');
+    //   this.state.update((s) => ({
+    //     ...s,
+    //     user: { ...dto, id: 'xxx', name: 'Phu tran' },
+    //     accessToken: 'data.accessToken',
+    //     refreshToken: 'token',
+    //     loading: false,
+    //     error: null,
+    //   }));
+    //   this.nav.navigateRoot('/', { animated: false });
+    // }, 3000);
     this.api
       .login<LoginDto, LoginResponse>(dto)
       .pipe(
@@ -65,10 +79,10 @@ export class AuthStore {
             loading: false,
             error: null,
           }));
-          this.router.navigateByUrl('/');
+          this.nav.navigateRoot('/', { animated: false });
         }),
         catchError((e) => {
-          // this.fail(e?.error?.message || e?.message || 'LOGIN_FAILED');
+          this.fail(e?.error?.message || e?.message || 'LOGIN_FAILED');
           return EMPTY;
         })
       )
@@ -86,10 +100,10 @@ export class AuthStore {
             loading: false,
             error: null,
           }));
-          this.router.navigateByUrl('/');
+          this.nav.navigateRoot('/', { animated: false });
         }),
         catchError((e) => {
-          // this.fail(e?.error?.message || e?.message || 'REGISTER_FAILED');
+          this.fail(e?.error?.message || e?.message || 'REGISTER_FAILED');
           return EMPTY;
         })
       )
