@@ -1,9 +1,8 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { catchError, EMPTY, firstValueFrom, tap } from 'rxjs';
+import { catchError, delay, EMPTY, firstValueFrom, tap } from 'rxjs';
 import { LoginDto, LoginResponse, RegisterDto, User } from './auth.types';
 import { AuthApi } from '@shared/apis';
 import { StorageService } from '@shared/services/storage.service';
-import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ToastService } from '@shared/services/toast.service';
 
@@ -58,7 +57,7 @@ export class AuthStore {
     this.api
       .login<LoginDto, LoginResponse>(dto)
       .pipe(
-        tap(({ data }) => {
+        tap(({ data, message }) => {
           this.storage.setAccess(data.accessToken ?? null);
           this.storage.setRefresh(data.refreshToken ?? null);
           this.state.update((s) => ({
@@ -69,6 +68,13 @@ export class AuthStore {
             loading: false,
             error: null,
           }));
+          this.toastService.openToast({
+            color: 'success',
+            message: message || 'Create account successfully!',
+          });
+        }),
+        delay(1500),
+        tap(() => {
           this.nav.navigateRoot('/', { animated: false });
         }),
         catchError((e) => {
@@ -95,6 +101,13 @@ export class AuthStore {
             loading: false,
             error: null,
           }));
+          this.toastService.openToast({
+            color: 'success',
+            message: res.message || 'Create account successfully!',
+          });
+        }),
+        delay(1500),
+        tap(() => {
           this.nav.navigateRoot('/', { animated: false });
         }),
         catchError((e) => {

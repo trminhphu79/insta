@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import {
   IonIcon,
   IonTabBar,
@@ -8,6 +13,7 @@ import {
 import { search, personCircleOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'insta-footer',
@@ -17,6 +23,8 @@ import { RouterLink } from '@angular/router';
   imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, RouterLink],
 })
 export class FooterComponent implements OnInit {
+  router = inject(Router);
+
   constructor() {
     addIcons({ search, personCircleOutline });
   }

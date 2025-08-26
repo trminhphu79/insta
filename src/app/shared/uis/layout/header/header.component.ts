@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+} from '@angular/core';
 import { IonIcon } from '@ionic/angular/standalone';
 
 @Component({

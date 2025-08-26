@@ -1,4 +1,9 @@
-<insta-header [userName]="currentUser()?.username || ''"></insta-header>
+@if(!hideHeader()){
+<ion-header>
+  <insta-header [userName]="currentUser()?.username || ''"></insta-header>
+</ion-header>
+}
+
 <ion-content>
   <ion-router-outlet></ion-router-outlet>
   <insta-footer></insta-footer>

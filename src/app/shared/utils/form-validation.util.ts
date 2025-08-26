@@ -32,11 +32,10 @@ export const passwordValidator = (): ValidatorFn => {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value as string;
 
-    if (!value) return null; // don't validate empty -> let required validator handle
+    if (!value) return null;
 
     const errors: any = {};
 
-    // length
     if (value.length < 8) {
       errors.minLength = true;
     }
@@ -44,12 +43,10 @@ export const passwordValidator = (): ValidatorFn => {
       errors.maxLength = true;
     }
 
-    // at least one uppercase
     if (!/[A-Z]/.test(value)) {
       errors.uppercase = true;
     }
 
-    // at least one digit
     if (!/[0-9]/.test(value)) {
       errors.number = true;
     }

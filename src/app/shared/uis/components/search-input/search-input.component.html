@@ -1,0 +1,17 @@
+<!-- search-input.component.html -->
+<section class="border-gray-200 border rounded-[12px] relative">
+  <ion-icon
+    class="text-gray-300 absolute top-[6px] left-[10px] text-[20px]"
+    slot="start"
+    name="search"
+    aria-hidden="true"
+  ></ion-icon>
+  <input
+    class="border-0 outline-none pl-8 pr-4 py-1 h-[32px] text-base placeholder:text-sm w-full"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [value]="value"
+    (input)="handleInput($event)"
+    (blur)="handleBlur()"
+  />
+</section>

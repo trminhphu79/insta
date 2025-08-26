@@ -7,7 +7,6 @@ export const routes: Routes = [
     path: '',
     canMatch: [authCanActivePage],
     component: LayoutComponent,
-    pathMatch: 'full',
     children: [
       {
         path: '',
@@ -22,6 +21,14 @@ export const routes: Routes = [
         path: 'profile',
         loadChildren: () =>
           import('./profile/profile.routes').then((c) => c.profileRoutes),
+      },
+      {
+        path: 'search',
+        data: {
+          hideHeader: true,
+        },
+        loadChildren: () =>
+          import('./search/search.routes').then((c) => c.searchRoutes),
       },
     ],
   },

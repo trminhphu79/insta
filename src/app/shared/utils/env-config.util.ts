@@ -1,4 +1,4 @@
-import { EnvironmentProviders, InjectionToken, Provider } from '@angular/core';
+import { InjectionToken, Provider } from '@angular/core';
 import { IEnvironmentConfig } from '@shared/interfaces/env-config.interface';
 
 export const CONFIG_TOKEN = new InjectionToken<IEnvironmentConfig>(
