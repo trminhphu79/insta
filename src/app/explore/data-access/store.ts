@@ -19,6 +19,7 @@ export class ExploreStore {
           query: '',
           mode: SearchModeEnum.NONE,
         });
+        this.onSelectSuggestion({ keyword: '' });
         return;
       }
 
@@ -135,8 +136,10 @@ export class ExploreStore {
     console.log(this);
     this.patch({ loading: true });
     this.api
-      .searchPost({ q: item.keyword, limit: 10, offset: 0 })
+      .searchPost({ q: this.searchControl.value, limit: 10, offset: 0 })
       .subscribe((response) => {
+        console.log('response with: ', this.searchControl.value);
+        console.log('response: ', response);
         this.patch({
           loading: false,
           mode: SearchModeEnum.NONE,

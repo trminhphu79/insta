@@ -13,58 +13,48 @@ export type MediaItem = { url: string; type: 'image' | 'video'; index: number };
 @Component({
   selector: 'insta-gallery',
   standalone: true,
-  imports: [IonGrid, IonRow, IonCol, NgIf, NgFor],
+  imports: [IonGrid, IonRow, IonCol],
   template: `
     <ion-grid class="explore-grid" fixed>
-      <ng-container *ngFor="let group of groups(); let i = index">
-        <ion-row class="explore-row" [class.row-odd]="i % 2 === 1">
-          <ng-container *ngIf="i % 2 === 0; else oddPattern">
-            <ion-col size="8" class="cluster">
-              <div class="cluster-grid">
-                <ng-container *ngFor="let it of group.small">
-                  <div class="tile tile-sm">
-                    <img style="object-fit: cover;" [src]="it.url" alt="" />
-                  </div>
-                </ng-container>
-              </div>
-            </ion-col>
+      @for (group of groups(); track $index; let i = $index) {
+      <ion-row class="explore-row" [class.row-odd]="i % 2 === 1">
+        @if (i % 2 === 0) {
+        <!-- EVEN -->
+        <ion-col size="6" sizeLg="8" class="cluster">
+          <div class="cluster-grid">
+            @for (it of group.small; track $index) {
+            <div class="tile tile-sm">
+              <img [src]="it.url" alt="" />
+            </div>
+            }
+          </div>
+        </ion-col>
 
-            <ion-col size="4" class="solo pl-[4px]">
-              <div class="tile tile-lg">
-                <img
-                  style="object-fit: cover;"
-                  *ngIf="group.big"
-                  [src]="group.big.url"
-                  alt=""
-                />
-              </div>
-            </ion-col>
-          </ng-container>
+        <ion-col size="6" sizeLg="4" class="solo pl-[4px]">
+          <div class="tile tile-lg">
+            @if (group.big) { <img [src]="group.big.url" alt="" /> }
+          </div>
+        </ion-col>
+        } @else {
+        <!-- ODD -->
+        <ion-col size="6" sizeLg="4" class="solo pr-[4px]">
+          <div class="tile tile-lg">
+            @if (group.big) { <img [src]="group.big.url" alt="" /> }
+          </div>
+        </ion-col>
 
-          <ng-template #oddPattern>
-            <ion-col size="4" class="solo pr-[4px]">
-              <div class="tile tile-lg">
-                <img
-                  style="object-fit: cover;"
-                  *ngIf="group.big"
-                  [src]="group.big.url"
-                  alt=""
-                />
-              </div>
-            </ion-col>
-
-            <ion-col size="8" class="cluster">
-              <div class="cluster-grid">
-                <ng-container *ngFor="let it of group.small">
-                  <div class="tile tile-sm">
-                    <img style="object-fit: cover;" [src]="it.url" alt="" />
-                  </div>
-                </ng-container>
-              </div>
-            </ion-col>
-          </ng-template>
-        </ion-row>
-      </ng-container>
+        <ion-col size="6" sizeLg="8" class="cluster">
+          <div class="cluster-grid">
+            @for (it of group.small; track $index) {
+            <div class="tile tile-sm">
+              <img [src]="it.url" alt="" />
+            </div>
+            }
+          </div>
+        </ion-col>
+        }
+      </ion-row>
+      }
     </ion-grid>
   `,
   styles: [
@@ -92,7 +82,7 @@ export type MediaItem = { url: string; type: 'image' | 'video'; index: number };
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-auto-rows: 1fr;
-        gap: 6px;
+        gap: 0 2px;
         height: 100%;
       }
 
@@ -125,16 +115,35 @@ export type MediaItem = { url: string; type: 'image' | 'video'; index: number };
         flex: 1 1 auto;
       }
 
-      @media (max-width: 420px) {
-        .explore-row {
-          flex-direction: column;
+      @media (max-width: 460px) {
+        .tile-lg {
+          aspect-ratio: 1 / 1;
         }
+      }
+
+      @media (min-width: 431px) and (max-width: 1024px) {
         ion-col[size='8'],
         ion-col[size='4'] {
-          width: 100%;
+          flex: 0 0 50% !important;
+          max-width: 50%;
         }
         .tile-lg {
-          aspect-ratio: 16 / 9;
+          aspect-ratio: 1 / 1;
+        }
+      }
+
+      /* ✅ Desktop: back to 8/4 (default) */
+      @media (min-width: 1025px) {
+        ion-col[size='8'] {
+          flex: 0 0 66.6667% !important;
+          max-width: 66.6667%;
+        }
+        ion-col[size='4'] {
+          flex: 0 0 33.3333% !important;
+          max-width: 33.3333%;
+        }
+        .tile-lg {
+          aspect-ratio: 2 / 3;
         }
       }
     `,
