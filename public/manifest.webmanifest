@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "short_name": "app",
+  "name": "insta",
+  "short_name": "insta",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
