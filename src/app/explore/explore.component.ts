@@ -34,15 +34,7 @@ export class ExploreComponent {
 
   protected mode = this.store.mode;
   protected searchControl = this.store.searchControl;
+  protected onControlFocus = this.store.onControlFocus;
 
   protected searchMode = SearchModeEnum;
-
-  focusChange(value: boolean) {
-    if (this.searchControl.value) return;
-    if (value) {
-      this.store.patch({ mode: SearchModeEnum.RECENT });
-    } else {
-      this.store.patch({ mode: SearchModeEnum.NONE });
-    }
-  }
 }

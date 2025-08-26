@@ -4,12 +4,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   selector: 'insta-recent-suggestion',
   templateUrl: './recent-suggestion.component.html',
   styleUrls: ['./recent-suggestion.component.scss'],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecentSuggestionComponent  implements OnInit {
-
-  constructor() { }
+export class RecentSuggestionComponent implements OnInit {
+  constructor() {}
 
   ngOnInit() {}
-
 }

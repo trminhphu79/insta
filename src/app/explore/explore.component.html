@@ -2,8 +2,8 @@
   <section class="p-4">
     <insta-search-input
       [formControl]="searchControl"
-      (focused)="focusChange(true)"
-      (blurred)="focusChange(false)"
+      (focused)="onControlFocus(true)"
+      (blurred)="onControlFocus(false)"
     ></insta-search-input>
   </section>
   <section class="px-4 explore-content">

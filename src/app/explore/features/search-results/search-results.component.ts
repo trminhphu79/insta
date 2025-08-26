@@ -4,12 +4,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   selector: 'insta-search-results',
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchResultsComponent  implements OnInit {
-
-  constructor() { }
+export class SearchResultsComponent implements OnInit {
+  constructor() {}
 
   ngOnInit() {}
-
 }

@@ -126,4 +126,13 @@ export class ExploreStore {
   search(term: string) {
     this.query.set((term ?? '').trim());
   }
+
+  onControlFocus(value: boolean) {
+    if (this.searchControl.value) return;
+    if (value) {
+      this.patch({ mode: SearchModeEnum.RECENT });
+    } else {
+      this.patch({ mode: SearchModeEnum.NONE });
+    }
+  }
 }
