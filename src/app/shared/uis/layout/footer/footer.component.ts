@@ -10,8 +10,6 @@ import {
   IonTabButton,
   IonTabs,
 } from '@ionic/angular/standalone';
-import { search, personCircleOutline } from 'ionicons/icons';
-import { addIcons } from 'ionicons';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 
@@ -26,7 +24,6 @@ export class FooterComponent implements OnInit {
   router = inject(Router);
 
   constructor() {
-    addIcons({ search, personCircleOutline });
   }
 
   ngOnInit() {}

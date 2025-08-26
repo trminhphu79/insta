@@ -1,0 +1,18 @@
+<ion-content>
+  <section class="p-4">
+    <insta-search-input
+      [formControl]="searchControl"
+      (focused)="focusChange(true)"
+      (blurred)="focusChange(false)"
+    ></insta-search-input>
+  </section>
+  <section class="px-4 explore-content">
+    @switch (mode()) { @case (searchMode.NONE) {
+    <insta-search-results></insta-search-results>
+    } @case (searchMode.RECENT){
+    <insta-recent-suggestion></insta-recent-suggestion>
+    } @default {
+    <insta-search-suggestion></insta-search-suggestion>
+    } }
+  </section>
+</ion-content>

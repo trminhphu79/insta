@@ -3,5 +3,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  .explore-content {
+    height: calc(100% - 32px);
+  }
 }

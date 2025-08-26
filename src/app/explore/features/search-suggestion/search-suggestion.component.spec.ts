@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SearchComponent } from './search.component';
+import { SearchSuggestionComponent } from './search-suggestion.component';
 
-describe('SearchComponent', () => {
-  let component: SearchComponent;
-  let fixture: ComponentFixture<SearchComponent>;
+describe('SearchSuggestionComponent', () => {
+  let component: SearchSuggestionComponent;
+  let fixture: ComponentFixture<SearchSuggestionComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchComponent ],
+      declarations: [ SearchSuggestionComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SearchComponent);
+    fixture = TestBed.createComponent(SearchSuggestionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

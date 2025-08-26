@@ -28,7 +28,7 @@ export const routes: Routes = [
           hideHeader: true,
         },
         loadChildren: () =>
-          import('./search/search.routes').then((c) => c.searchRoutes),
+          import('./explore/explore.routes').then((c) => c.exploreRoutes),
       },
     ],
   },

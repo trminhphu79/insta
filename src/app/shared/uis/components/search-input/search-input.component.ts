@@ -1,15 +1,20 @@
-// search-input.component.ts
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  HostListener,
+  ViewChild,
   forwardRef,
-  Input,
+  input,
+  output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonIcon } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'insta-search-input',
+  standalone: true,
+  imports: [IonIcon],
   templateUrl: './search-input.component.html',
   styleUrls: ['./search-input.component.scss'],
   providers: [
@@ -20,43 +25,62 @@ import { IonIcon } from '@ionic/angular/standalone';
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [IonIcon],
 })
 export class SearchInputComponent implements ControlValueAccessor {
-  @Input() placeholder = 'Tìm kiếm';
+  placeholder = input<string>('Tìm kiếm');
+
+  focused = output<void>();
+  blurred = output<void>();
+  focusChange = output<boolean>();
+
+  @ViewChild('inputEl', { static: true })
+  inputEl!: ElementRef<HTMLInputElement>;
 
   value = '';
   disabled = false;
 
-  // callbacks
-  private onChange: (value: any) => void = () => {};
+  private onChange: (v: any) => void = () => {};
   private onTouched: () => void = () => {};
 
-  // ControlValueAccessor implementation
-  writeValue(obj: any): void {
-    this.value = obj || '';
+  writeValue(v: any): void {
+    this.value = v ?? '';
   }
-
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
-
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
-
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
-  // handlers
   handleInput(e: Event) {
-    const target = e.target as HTMLInputElement;
-    this.value = target.value;
-    this.onChange(this.value);
+    const v = (e.target as HTMLInputElement).value;
+    this.value = v;
+    this.onChange(v);
   }
 
-  handleBlur() {
+  focus() {
+    if (!this.disabled) this.inputEl.nativeElement.focus();
+  }
+
+  @HostListener('focusin')
+  onFocusIn() {
+    this.focused.emit();
+    this.focusChange.emit(true);
+  }
+
+  @HostListener('focusout')
+  onFocusOut() {
     this.onTouched();
+    this.blurred.emit();
+    this.focusChange.emit(false);
+  }
+
+  clearValue() {
+    this.value = '';
+    this.onChange(this.value);
+    this.inputEl?.nativeElement.focus();
   }
 }

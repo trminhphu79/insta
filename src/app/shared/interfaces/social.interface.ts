@@ -10,3 +10,7 @@ export interface IPost {
     height?: number;
   }>;
 }
+
+export interface ISuggestion {
+  keyword: string;
+}
