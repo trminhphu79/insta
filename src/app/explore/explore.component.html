@@ -1,12 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <section class="py-4">
+      <insta-search-input
+        [formControl]="searchControl"
+        (focused)="onControlFocus(true)"
+        (blurred)="onControlFocus(false)"
+      ></insta-search-input>
+    </section>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <section class="p-4">
-    <insta-search-input
-      [formControl]="searchControl"
-      (focused)="onControlFocus(true)"
-      (blurred)="onControlFocus(false)"
-    ></insta-search-input>
-  </section>
-  <section class="px-4 explore-content">
+  <section class="py-4 explore-content">
     @switch (mode()) { @case (searchMode.NONE) {
     <insta-search-results></insta-search-results>
     } @case (searchMode.RECENT){

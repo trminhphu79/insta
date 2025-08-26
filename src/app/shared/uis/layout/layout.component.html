@@ -1,6 +1,8 @@
 @if(!hideHeader()){
-<ion-header>
-  <insta-header [userName]="currentUser()?.username || ''"></insta-header>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <insta-header [userName]="currentUser()?.username || ''"></insta-header>
+  </ion-toolbar>
 </ion-header>
 }
 

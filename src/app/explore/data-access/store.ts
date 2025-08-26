@@ -1,16 +1,10 @@
-import {
-  Injectable,
-  computed,
-  effect,
-  linkedSignal,
-  signal,
-} from '@angular/core';
+import { Injectable, effect, linkedSignal, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged, startWith } from 'rxjs/operators';
 import { SocialApi } from '@shared/apis';
-import { SearchModeEnum, SearchState } from './types';
-import { fromEvent, timer } from 'rxjs';
+import { SearchModeEnum, ExploreState } from './types';
+import { ISuggestion } from '@shared/interfaces/social.interface';
 
 @Injectable()
 export class ExploreStore {
@@ -20,7 +14,6 @@ export class ExploreStore {
       const token = ++this.reqToken;
       if (!q) {
         this.patch({
-          dataSource: [],
           loading: false,
           error: null,
           query: '',
@@ -34,13 +27,14 @@ export class ExploreStore {
         loading: true,
       });
 
-      timer(500).subscribe(() => {
-        // this.patch({
-        //   mode: SearchModeEnum.NONE,
-        //   loading: false,
-        //   dataSource: [],
-        // });
-      });
+      this.api
+        .suggestion(q)
+        .pipe()
+        .subscribe((response) => {
+          console.log('Response: ', response);
+          this.patch({ loading: false, suggestions: response.data });
+        });
+
       // this.api
       //   .searchPost<IPost[]>({ q, limit: 10, offset: 0 })
       //   .pipe(
@@ -82,9 +76,9 @@ export class ExploreStore {
 
   readonly query = linkedSignal(() => this.debouncedQuery().trim());
 
-  private state = signal<SearchState>({
+  private state = signal<ExploreState>({
     dataSource: [],
-    suggestion: [],
+    suggestions: [],
     recentSuggestions: [],
     loading: false,
     error: null,
@@ -94,19 +88,19 @@ export class ExploreStore {
 
   private reqToken = 0;
 
-  readonly mode = computed(() => this.state().mode);
-  readonly count = computed(() => this.state().dataSource.length);
-  readonly error = computed(() => this.state().error);
-  readonly isEmpty = computed(
+  readonly mode = linkedSignal(() => this.state().mode);
+  readonly count = linkedSignal(() => this.state().dataSource.length);
+  readonly error = linkedSignal(() => this.state().error);
+  readonly isEmpty = linkedSignal(
     () => !this.loading() && this.count() === 0 && !!this.queryText()
   );
-  readonly queryText = computed(() => this.state().query);
-  readonly hasResult = computed(() => !this.loading() && this.count() > 0);
-  readonly loading = computed(() => this.state().loading);
+  readonly queryText = linkedSignal(() => this.state().query);
+  readonly hasResult = linkedSignal(() => !this.loading() && this.count() > 0);
+  readonly loading = linkedSignal(() => this.state().loading);
+  readonly suggestions = linkedSignal(() => this.state().suggestions);
+  readonly dataSource = linkedSignal(() => this.state().dataSource);
 
-  readonly dataSource = computed(() => this.state().dataSource);
-
-  patch(p: Partial<SearchState>) {
+  patch(p: Partial<ExploreState>) {
     this.state.update((s) => ({ ...s, ...p }));
   }
 
@@ -127,12 +121,27 @@ export class ExploreStore {
     this.query.set((term ?? '').trim());
   }
 
-  onControlFocus(value: boolean) {
+  // using arrow function to keep the explore store context ( this )
+  onControlFocus = (value: boolean) => {
     if (this.searchControl.value) return;
     if (value) {
       this.patch({ mode: SearchModeEnum.RECENT });
     } else {
       this.patch({ mode: SearchModeEnum.NONE });
     }
-  }
+  };
+
+  onSelectSuggestion = (item: ISuggestion) => {
+    console.log(this);
+    this.patch({ loading: true });
+    this.api
+      .searchPost({ q: item.keyword, limit: 10, offset: 0 })
+      .subscribe((response) => {
+        this.patch({
+          loading: false,
+          mode: SearchModeEnum.NONE,
+          dataSource: response.data,
+        });
+      });
+  };
 }

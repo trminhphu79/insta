@@ -5,7 +5,6 @@ export class StorageService {
   private ACCESS_KEY = 'accessToken';
   private REFRESH_KEY = 'refreshToken';
 
-  // --- Access Token ---
   getAccess(): string | null {
     return localStorage.getItem(this.ACCESS_KEY);
   }
@@ -18,7 +17,6 @@ export class StorageService {
     }
   }
 
-  // --- Refresh Token ---
   getRefresh(): string | null {
     return localStorage.getItem(this.REFRESH_KEY);
   }

@@ -10,6 +10,7 @@ import {
   IonRouterOutlet,
   IonContent,
   IonHeader,
+  IonToolbar
 } from '@ionic/angular/standalone';
 import { AuthStore } from '@shared/store/auth.store';
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
@@ -36,6 +37,7 @@ function collectRouteData(rootSnapshot: ActivatedRouteSnapshot) {
     IonRouterOutlet,
     IonContent,
     IonHeader,
+    IonToolbar
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

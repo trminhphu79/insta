@@ -12,7 +12,7 @@ import { SearchSuggestionComponent } from './features/search-suggestion/search-s
 import { RecentSuggestionComponent } from './features/recent-suggestion/recent-suggestion.component';
 import { SearchModeEnum } from './data-access/types';
 import { SearchResultsComponent } from './features/search-results/search-results.component';
-import { IonContent } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonToolbar } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'insta-explore',
@@ -27,6 +27,8 @@ import { IonContent } from '@ionic/angular/standalone';
     SearchSuggestionComponent,
     RecentSuggestionComponent,
     IonContent,
+    IonHeader,
+    IonToolbar,
   ],
 })
 export class ExploreComponent {

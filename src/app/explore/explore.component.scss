@@ -7,3 +7,7 @@
     height: calc(100% - 32px);
   }
 }
+
+ion-toolbar {
+  --border-color: var(--ion-background-color) !important;
+}

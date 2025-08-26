@@ -6,9 +6,9 @@ export enum SearchModeEnum {
   SEARCHING,
 }
 
-export type SearchState = {
+export type ExploreState = {
   dataSource: IPost[];
-  suggestion: Array<ISuggestion>;
+  suggestions: Array<ISuggestion>;
   recentSuggestions: Array<ISuggestion>;
   loading: boolean;
   error: string | null;
