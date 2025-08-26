@@ -1,11 +1,13 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
   <!-- Simple example: banner button -->
-  <ion-footer *ngIf="install.canInstall()">
+  @if(install.canInstall()){
+  <ion-footer>
     <ion-toolbar>
       <ion-button expand="block" (click)="onInstall()">
         Install App
       </ion-button>
     </ion-toolbar>
   </ion-footer>
+  }
 </ion-app>
